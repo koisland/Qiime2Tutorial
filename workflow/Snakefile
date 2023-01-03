@@ -1,0 +1,23 @@
+import os
+
+rule all:
+    input:
+        rules.download_sample_metadata.output
+
+rule download_sample_metadata:
+    output:
+        os.path.join("data", "sample_metadata.csv")
+    params:
+        url = "https://data.qiime2.org/2022.11/tutorials/moving-pictures/sample_metadata.tsv"
+    shell:
+        """
+        curl -sL {params.url} > {output}
+        """
+
+rule download_sample_seqs:
+    output:
+        os.path.join("data", "emp-single-end-sequences", "sequences.fastq.gz")
+
+rule download_sample_barcodes:
+    output:
+        os.path.join("data", "emp-single-end-sequences", "barcodes.fastq.gz")
