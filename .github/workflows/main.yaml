@@ -1,0 +1,20 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Lint workflow
+      uses: snakemake/snakemake-github-action@v1
+      with:
+        directory: .
+        snakefile: workflow/Snakefile
+        task: run
+        args: "-np -c 1"
