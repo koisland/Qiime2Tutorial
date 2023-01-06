@@ -8,3 +8,6 @@
 venv
 .snakemake
 logs/
+output/
+data/
+benchmarks/
